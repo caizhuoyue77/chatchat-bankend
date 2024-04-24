@@ -22,12 +22,9 @@ async def search_location_iter(location: str):
     except requests.RequestException as e:
         return {"error": f"Request failed: {str(e)}"}
 
-def search_weather(location: str):
+def search_location(location: str):
     return asyncio.run(search_location_iter(location))
 
-class WeatherInput(BaseModel):
+class LocationInput(BaseModel):
     location: str = Field(description="地点的名称，如changsha")
 
-if __name__ == "__main__":
-    result = search_weather("101040100")
-    print("答案:",result)
