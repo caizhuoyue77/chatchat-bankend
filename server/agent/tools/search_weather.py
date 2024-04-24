@@ -15,7 +15,7 @@ async def search_weather_iter(location: str):
     print(matches[0])
 
     params = {
-        "location": "101040100"
+        "location": "101040100",
     }
 
     # 发送GET请求

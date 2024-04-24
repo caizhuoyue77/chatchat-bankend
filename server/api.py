@@ -173,7 +173,11 @@ def mount_app_routes(app: FastAPI, run_mode: str = None):
              tags=["Other"],
              summary="查看天气信息",
              )(get_weather_info)
-
+    
+    app.get("/other/get_location_id",
+            tags=["Other"],
+            summary="取location",
+            )(get_weather_info)
 
 def mount_knowledge_routes(app: FastAPI):
     from server.chat.knowledge_base_chat import knowledge_base_chat

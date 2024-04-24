@@ -12,3 +12,5 @@ from .wolfram import wolfram, WolframInput
 from .youtube import youtube_search, YoutubeInput
 from server.agent.tools.search_express import search_express, ExpressInput
 from server.agent.tools.search_weather import search_weather, WeatherInput
+from server.agent.tools.search_location import search_location, LocationInput
+from server.agent.tools.sunrise_sunset import sunrise_sunset, SunriseSunsetInput

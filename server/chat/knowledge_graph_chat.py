@@ -27,7 +27,7 @@ from langchain.chains import LLMChain
 from langchain.chat_models import ChatOpenAI
 
 
-llm = ChatOpenAI(openai_api_key="", temperature=0,
+llm = ChatOpenAI(openai_api_key="sb-0ed569a255461d5fc8304e26dc11250c6b1adad270a62785", temperature=0,
                  openai_api_base="https://api.openai-sb.com/v1", request_timeout=5)
 base_url = "http://47.94.3.221:9176/"
 
