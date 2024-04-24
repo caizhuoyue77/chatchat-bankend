@@ -29,7 +29,7 @@ from server.utils import (BaseResponse, ListResponse, FastAPI, MakeFastAPIOfflin
                           get_server_configs, get_prompt_template)
 from typing import List, Literal
 from api_user import mount_user_routes
-from server.api_test import get_express_info, get_weather_info
+from server.api_test import get_express_info, get_weather_info, get_location_info
 
 nltk.data.path = [NLTK_DATA_PATH] + nltk.data.path
 
@@ -173,6 +173,11 @@ def mount_app_routes(app: FastAPI, run_mode: str = None):
              tags=["Other"],
              summary="查看天气信息",
              )(get_weather_info)
+
+    app.get("/other/get_location_info",
+             tags=["Other"],
+             summary="搜索地点信息",
+             )(get_location_info)
 
 
 def mount_knowledge_routes(app: FastAPI):

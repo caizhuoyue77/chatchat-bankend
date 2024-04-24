@@ -40,7 +40,13 @@ tools = [
         name="天气查询",
         description="天气查询，输入是一个location（类似于101010100）来进行当前天气的查询",
         args_schema=WeatherInput,
-    )
+    ),
+    Tool.from_function(
+        func=search_location,
+        name="地点查询",
+        description="地点查询，如果要搜索天气但是不知道对应城市的location id，就调用这个工具来先查询得到location id的值",
+        args_schema=WeatherInput,
+    ),
 ]
 
 tool_names = [tool.name for tool in tools]

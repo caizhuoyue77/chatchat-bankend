@@ -12,6 +12,21 @@ from openapi_spec_validator import validate_spec
 import os
 import requests
 
+def get_location_info(location):
+    api_key = "7fa7d0d9ef374dc78c32fd8f5cb444b7"
+    base_url = "https://geoapi.qweather.com/v2/city/lookup"
+    params = {
+        "key": api_key,
+        "location":location
+    }
+
+    response = requests.get(base_url, params=params)
+
+    if response.status_code == 200:
+        response_json = response.json()  # 首先获取整个JSON数据
+        return response_json  # 返回JSON中的'data'部分，如果没有则返回空字典
+    else:
+        return {"error": "Failed to fetch tracking information"}
 
 def get_weather_info(location):
     api_key = "7fa7d0d9ef374dc78c32fd8f5cb444b7"
