@@ -3,12 +3,11 @@ import asyncio
 from pydantic import BaseModel, Field
 import requests
 
-async def search_weather_iter(location: str):
-    base_url = "http://162.105.88.82:57861/other/get_weather_info"
+async def search_current_weather_iter(location: str):
+    base_url = "http://162.105.88.82:57861//api/get_current_weather"
 
     import re
 
-    text = "This is a sample text with 123 numbers in it."
     pattern = r"\d+"
     matches = re.findall(pattern, location)
 
@@ -30,12 +29,8 @@ async def search_weather_iter(location: str):
     except requests.RequestException as e:
         return {"error": f"Request failed: {str(e)}"}
 
-def search_weather(location: str):
-    return asyncio.run(search_weather_iter(location))
+def search_current_weather(location: str):
+    return asyncio.run(search_current_weather_iter(location))
 
 class WeatherInput(BaseModel):
     location: str = Field(description="地点的ID")
-
-if __name__ == "__main__":
-    result = search_weather("101040100")
-    print("答案:",result)
