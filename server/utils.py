@@ -13,19 +13,24 @@ from langchain.chat_models import ChatOpenAI, AzureChatOpenAI, ChatAnthropic
 from langchain.llms import OpenAI, AzureOpenAI, Anthropic
 import httpx
 from typing import Literal, Optional, Callable, Generator, Dict, Any, Awaitable, Union
-
+import re
 
 async def wrap_done(fn: Awaitable, event: asyncio.Event):
     """Wrap an awaitable with a event to signal when it's done or an exception is raised."""
     try:
         await fn
     except Exception as e:
+        # TODO: handle exception
+
+        logger.error("Utils in server/util.py")
+
         msg = f"Caught exception: {e}"
         logger.error(f'{e.__class__.__name__}: {msg}',
                      exc_info=e if log_verbose else None)
     finally:
         # Signal the aiter to stop.
         event.set()
+
 
 def get_ChatOpenAI(
         model_name: str,

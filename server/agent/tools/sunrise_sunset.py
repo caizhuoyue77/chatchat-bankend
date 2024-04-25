@@ -2,40 +2,32 @@ import json
 import asyncio
 from pydantic import BaseModel, Field
 import requests
+import re
 
-async def sunrise_sunset_iter(location: str):
+async def sunrise_sunset_iter(input: str):
     base_url = "https://devapi.qweather.com/v7/astronomy/sun"
 
+    print("\n################\n#############\n###############|n")
+    print(input)
 
-    print(type(location))
-    print(location)
+    location = ""
+    date = ""
 
-    pattern = r'(?location[=:](.*?)(?:,|\b)(?:date[=:](.*?)(?:,|\b)'
+    pattern = r'location[=:(（是](\d{9}).*?date[=:（(是](\d{8})'
 
-    matches = re.findall(pattern, location)
+    matches = re.findall(pattern, input)
 
     for match in matches:
-        match = [group for group in match if group]
-        if match:
-            if match[0]:
-                location = match[0]
-            elif match[1]:
-                date = match[1]
-        
-    print(location)
-    print(date)
+        location, date = match
 
-    import re
+    if not (len(location) == 9 and len(date) == 8):
+        location, date = input.split(',')
 
-    # if not re.match(r"^\d{9}$", location):
-    #     return {"error": "Invalid location format"}
-    # else:
-    #     location = re.match(r"^\d{9}$", location).group()
-
+    print(location, date)
 
     params = {
         "location": location,
-        "date": "20240428",
+        "date": date,
         "key":"7fa7d0d9ef374dc78c32fd8f5cb444b7"
     }
 

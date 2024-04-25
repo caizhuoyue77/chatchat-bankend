@@ -2,11 +2,10 @@ import json
 import asyncio
 from pydantic import BaseModel, Field
 import requests
+import re
 
 async def search_weather_iter(location: str):
     base_url = "http://162.105.88.82:57861/other/get_weather_info"
-
-    import re
 
     text = "This is a sample text with 123 numbers in it."
     pattern = r"\d+"
