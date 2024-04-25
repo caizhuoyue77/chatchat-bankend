@@ -8,15 +8,29 @@ async def sunrise_sunset_iter(location: str):
 
 
     print(type(location))
-
     print(location)
+
+    pattern = r'(?location[=:](.*?)(?:,|\b)(?:date[=:](.*?)(?:,|\b)'
+
+    matches = re.findall(pattern, location)
+
+    for match in matches:
+        match = [group for group in match if group]
+        if match:
+            if match[0]:
+                location = match[0]
+            elif match[1]:
+                date = match[1]
+        
+    print(location)
+    print(date)
 
     import re
 
-    if not re.match(r"^\d{9}$", location):
-        return {"error": "Invalid location format"}
-    else:
-        location = re.match(r"^\d{9}$", location).group()
+    # if not re.match(r"^\d{9}$", location):
+    #     return {"error": "Invalid location format"}
+    # else:
+    #     location = re.match(r"^\d{9}$", location).group()
 
 
     params = {

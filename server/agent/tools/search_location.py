@@ -7,7 +7,7 @@ async def search_location_iter(location: str):
     base_url = "https://geoapi.qweather.com/v2/city/lookup"
 
     params = {
-        "location": "changsha",
+        "location": location,
         "key":"7fa7d0d9ef374dc78c32fd8f5cb444b7"
     }
 
@@ -27,4 +27,4 @@ def search_location(location: str):
     return asyncio.run(search_location_iter(location))
 
 class LocationInput(BaseModel):
-    location: str = Field(description="地点的名称，一般是英文")
+    location: str = Field(description="地点的名称，类似changsha")

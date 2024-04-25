@@ -20,17 +20,12 @@ async def wrap_done(fn: Awaitable, event: asyncio.Event):
     try:
         await fn
     except Exception as e:
-        # TODO: handle exception
-
-        logger.error("Utils in server/util.py")
-
         msg = f"Caught exception: {e}"
         logger.error(f'{e.__class__.__name__}: {msg}',
                      exc_info=e if log_verbose else None)
     finally:
         # Signal the aiter to stop.
         event.set()
-
 
 def get_ChatOpenAI(
         model_name: str,
