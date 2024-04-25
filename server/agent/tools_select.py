@@ -19,13 +19,13 @@ tools = [
     ),
     Tool.from_function(
         func=search_weather,
-        name="天气查询",
-        description="天气查询，输入是一个location（类似于101010100）来进行当前天气的查询",
+        name="当前天气查询",
+        description="当前天气查询，输入是一个location（类似于101010100）来进行当前天气的查询",
         args_schema=WeatherInput,
     ),
     Tool.from_function(
         func=search_location,
-        name="地点查询",
+        name="地点id查询",
         description="地点查询，用于自动识别location，只需要返回一个8位数字的location，例如101010100",
         args_schema=LocationInput,
     ),
@@ -33,7 +33,19 @@ tools = [
         func=sunrise_sunset,
         name="日出日落查询",
         description="日出日落查询，用于自动识别location和date。需要返回一个9位数字的location（如101010100）。和一个8位数的日期（如20240428），中间用逗号分隔开。",
-        args_schema=SunriseSunsetInput,
+        args_schema=WeatherInput,
+    ),
+     Tool.from_function(
+        func=weather_index_1d,
+        name="天气指数查询",
+        description="天气指数查询，查询中国和全球城市天气的一天的生活指数预报数据，生活指数包括：舒适度指数、洗车指数、穿衣指数、感冒指数、运动指数、旅游指数等。",
+        args_schema=WeatherInput,
+    ),
+     Tool.from_function(
+        func=weather_forcast_24h,
+        name="天气预报查询",
+        description="天气预报查询，查询中国和全球城市天气的未来24小时预报数据，包括：温度、湿度、风向、风力等。",
+        args_schema=WeatherInput,
     ),
 ]
 

@@ -7,4 +7,9 @@ from .water_level import waterlevelcheck, WaterLevelSchema
 from server.agent.tools.search_express import search_express, ExpressInput
 from server.agent.tools.search_weather import search_weather, WeatherInput
 from server.agent.tools.search_location import search_location, LocationInput
-from server.agent.tools.sunrise_sunset import sunrise_sunset, SunriseSunsetInput
+from server.agent.tools.sunrise_sunset import sunrise_sunset, WeatherInput
+from server.agent.tools.weather_forcast_24h import weather_forcast_24h
+from server.agent.tools.weather_rain_minute import weather_rain_minute
+from server.agent.tools.weather_forcast_3d import weather_forcast_3d
+from server.agent.tools.weather_forcast_7d import weather_forcast_7d
+from server.agent.tools.weather_index_1d import weather_index_1d

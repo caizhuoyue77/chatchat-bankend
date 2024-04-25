@@ -92,8 +92,7 @@ async def agent_chat(query: str = Body(..., description="用户输入", examples
         agent_executor = AgentExecutor.from_agent_and_tools(agent=agent,
                                                             tools=tools,
                                                             verbose=True,
-                                                            memory=memory,
-                                                            )
+                                                            memory=memory,)
         while True:
             try:
                 task = asyncio.create_task(wrap_done(

@@ -3,31 +3,16 @@ import asyncio
 from pydantic import BaseModel, Field
 import requests
 import re
+from server.agent.tools.helper import get_location_id
 
-async def sunrise_sunset_iter(input: str):
-    base_url = "https://devapi.qweather.com/v7/astronomy/sun"
 
-    print("\n################\n#############\n###############|n")
-    print(input)
+async def weather_index_1d_iter(input: str):
+    base_url = "https://devapi.qweather.com/v7/indices/1d"
 
-    location = ""
-    date = ""
-
-    pattern = r'location[=:(（是](\d{9}).*?date[=:（(是](\d{8})'
-
-    matches = re.findall(pattern, input)
-
-    for match in matches:
-        location, date = match
-
-    if not (len(location) == 9 and len(date) == 8):
-        location, date = input.split(',')
-
-    print(location, date)
-
+    location = get_location_id(input)
+    
     params = {
         "location": location,
-        "date": date,
         "key":"7fa7d0d9ef374dc78c32fd8f5cb444b7"
     }
 
@@ -43,13 +28,13 @@ async def sunrise_sunset_iter(input: str):
     except requests.RequestException as e:
         return {"error": f"Request failed: {str(e)}"}
 
-def sunrise_sunset(location: str):
-    return asyncio.run(sunrise_sunset_iter(location))
+def weather_index_1d(location: str):
+    return asyncio.run(weather_index_1d_iter(location))
 
 class WeatherInput(BaseModel):
     location: str = Field(description="地点的ID，类似101010100的格式,如果不知道就要调用位置查询API")
     # date: str = Field(description="日期，yyyymmdd格式，比如20240425")
 
 if __name__ == "__main__":
-    result = sunrise_sunset("101040100")
+    result = weather_index_1d("101040100")
     print("答案:",result)

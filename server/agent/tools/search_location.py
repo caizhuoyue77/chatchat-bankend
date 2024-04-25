@@ -28,3 +28,7 @@ def search_location(location: str):
 
 class LocationInput(BaseModel):
     location: str = Field(description="地点的名称，类似changsha")
+
+
+if __name__ == "__main__":
+    print(search_location("jiaxing"))

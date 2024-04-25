@@ -5,6 +5,11 @@ import requests
 import re
 
 async def search_weather_iter(location: str):
+
+    print("search_weather_iter")
+
+    return {"location":"101010100","weather":"晴转多云，可能会有小雨，记得带伞"}
+
     base_url = "http://162.105.88.82:57861/other/get_weather_info"
 
     text = "This is a sample text with 123 numbers in it."

@@ -3,6 +3,7 @@ from langchain.agents import Tool, AgentOutputParser
 from langchain.prompts import StringPromptTemplate
 from typing import List
 from langchain.schema import AgentAction, AgentFinish
+from configs import logger
 
 from configs import SUPPORT_AGENT_MODEL
 from server.agent import model_container
@@ -14,18 +15,17 @@ class CustomPromptTemplate(StringPromptTemplate):
         intermediate_steps = kwargs.pop("intermediate_steps")
         thoughts = ""
 
-        print("快来看")
-        for key, value in kwargs.items():
-        # 这里可以对每个参数进行操作，例如打印或者检查类型等
-            print(f"Key: {key}, Value: {value}")
-
-
         for action, observation in intermediate_steps:
             thoughts += action.log
             thoughts += f"\nObservation: {observation}\nThought: "
         kwargs["agent_scratchpad"] = thoughts
         kwargs["tools"] = "\n".join([f"{tool.name}: {tool.description}" for tool in self.tools])
         kwargs["tool_names"] = ", ".join([tool.name for tool in self.tools])
+
+
+        print("快来看4")
+        print(self.template.format(**kwargs))
+
         return self.template.format(**kwargs)
 
 
@@ -39,6 +39,12 @@ class CustomOutputParser(AgentOutputParser):
         if not any(agent in model_container.MODEL for agent in SUPPORT_AGENT_MODEL) and self.begin:
             self.begin = False
             stop_words = ["Observation:"]
+
+            print("快来看3")
+            print(f"llm_output的长度为{len(llm_output)}")
+            if(len(llm_output) > 1000):
+                print("这也太大了吧！！！！")
+
             min_index = len(llm_output)
             for stop_word in stop_words:
                 index = llm_output.find(stop_word)
@@ -62,6 +68,11 @@ class CustomOutputParser(AgentOutputParser):
         action = parts[1].split("Action Input:")[0].strip()
         action_input = parts[1].split("Action Input:")[1].strip()
 
+
+        print("快来看2")
+        print(f"action为{action}")
+        print(f"action input的长度为{len(action_input)}")
+
         # 原来的正则化检查方式，更严格，但是成功率更低
         # regex = r"Action\s*\d*\s*:(.*?)\nAction\s*\d*\s*Input\s*\d*\s*:[\s]*(.*)"
         # print("llm_output",llm_output)
@@ -77,6 +88,7 @@ class CustomOutputParser(AgentOutputParser):
 
         # Return the action and action input
         try:
+            print("調用agent action")
             ans = AgentAction(
                 tool=action,
                 tool_input=action_input.strip(" ").strip('"'),
