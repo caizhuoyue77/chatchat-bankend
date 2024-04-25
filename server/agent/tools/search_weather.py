@@ -11,7 +11,8 @@ async def search_weather_iter(location: str):
     pattern = r"\d+"
     matches = re.findall(pattern, location)
 
-    print(matches[0])
+    if(matches):
+        print(matches)
 
     params = {
         "location": "101040100",

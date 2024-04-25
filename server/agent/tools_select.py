@@ -32,7 +32,7 @@ tools = [
     Tool.from_function(
         func=sunrise_sunset,
         name="日出日落查询",
-        description="日出日落查询，用于自动识别location和date。需要返回一个8位数字的location，例如101010100。和一个8位数的日期，如20240428。",
+        description="日出日落查询，用于自动识别location和date。需要返回一个9位数字的location（如101010100）。和一个8位数的日期（如20240428），中间用逗号分隔开。",
         args_schema=SunriseSunsetInput,
     ),
 ]

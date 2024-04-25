@@ -2,7 +2,6 @@
 from .search_knowledge_simple import knowledge_search_simple
 from .search_all_knowledge_once import knowledge_search_once, KnowledgeSearchInput
 from .search_all_knowledge_more import knowledge_search_more, KnowledgeSearchInput
-from .translator import translate, TranslateInput
 from .weather import weathercheck, WhetherSchema
 from .water_level import waterlevelcheck, WaterLevelSchema
 from server.agent.tools.search_express import search_express, ExpressInput
