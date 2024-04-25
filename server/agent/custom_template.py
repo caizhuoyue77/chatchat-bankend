@@ -13,6 +13,13 @@ class CustomPromptTemplate(StringPromptTemplate):
     def format(self, **kwargs) -> str:
         intermediate_steps = kwargs.pop("intermediate_steps")
         thoughts = ""
+
+        print("快来看")
+        for key, value in kwargs.items():
+        # 这里可以对每个参数进行操作，例如打印或者检查类型等
+            print(f"Key: {key}, Value: {value}")
+
+
         for action, observation in intermediate_steps:
             thoughts += action.log
             thoughts += f"\nObservation: {observation}\nThought: "
