@@ -23,6 +23,10 @@ async def weather_rain_minute_iter(input: str):
         if response.status_code == 200:
             new_response = str(response.json())
             new_response = new_response[:100]
+
+            print(f"response:{response}")
+            print(f"new_response:{new_response}")
+
             # return response.json()  # 返回解析后的JSON数据
             return new_response    
         else:

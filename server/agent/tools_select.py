@@ -47,6 +47,12 @@ tools = [
         description="天气预报查询，查询中国和全球城市天气的未来24小时预报数据，包括：温度、湿度、风向、风力等。",
         args_schema=WeatherInput,
     ),
+     Tool.from_function(
+        func=weather_rain_minute,
+        name="分钟级降雨预报查询",
+        description="分钟级别的降雨预报查询，精确到分钟级别，识别location（9位数字）",
+        args_schema=WeatherInput,
+    ),
 ]
 
 tool_names = [tool.name for tool in tools]
