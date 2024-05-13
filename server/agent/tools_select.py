@@ -76,7 +76,19 @@ tools = [
         name="查询酒店信息",
         description="查询某地点的酒店信息，返回详细的酒店信息",
         args_schema=HotelInput,
-    )
+    ),
+    Tool.from_function(
+    func=location_to_lat_lon,
+    name="转换位置到经纬度",
+    description="根据提供的地点查询，返回对应的经纬度信息",
+    args_schema=LocationToLatLonInput,
+),
+Tool.from_function(
+    func=get_exchange_rates,
+    name="获取汇率信息",
+    description="根据基础货币获取当前的汇率信息，返回汇率数据",
+    args_schema=ExchangeRatesInput,
+)
 ]
 
 tool_names = [tool.name for tool in tools]

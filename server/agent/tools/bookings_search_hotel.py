@@ -1,54 +1,51 @@
 import json
 import asyncio
 from pydantic import BaseModel, Field
-import requests
+import aiohttp
 
-async def search_hotel_iter(tracking_no: str):
+class HotelSearchInput(BaseModel):
+    dest_id: str = Field(description="Destination ID for the hotel search")
+    search_type: str = Field(description="Type of search, e.g., 'CITY'")
+    arrival_date: str = Field(description="Arrival date at the hotel")
+    departure_date: str = Field(description="Departure date from the hotel")
+    adults: int = Field(description="Number of adults")
+    children_age: str = Field(description="Comma-separated ages of children")
+    room_qty: int = Field(description="Number of rooms required")
+    page_number: int = Field(default=1, description="Page number for pagination")
+    languagecode: str = Field(description="Language code for the response")
+    currency_code: str = Field(description="Currency code for pricing")
+
+async def search_hotels(input: HotelSearchInput):
     url = "https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels"
-
-    querystring = {
-        "dest_id":"-1924465",
-        "search_type":"CITY",
-        "arrival_date":"2024-05-15",
-        "departure_date":"2024-05-17",
-        "adults":"1",
-        "children_age":"",
-        "room_qty":"1",
-        "page_number":"1",
-        "languagecode":"zh-cn",
-        "currency_code":"CNY"
-        }
-
     headers = {
         "X-RapidAPI-Key": "e873f2422cmsh92c1c839d99aee8p1dfd77jsne5cf72c01848",
         "X-RapidAPI-Host": "booking-com15.p.rapidapi.com"
     }
-
-    try:
-        return "北京的酒店有:1.w酒店 10000元 2.希尔顿酒店 800元 3.丽思卡尔顿酒店 2000元"
-        
-        # response = requests.get(url, headers=headers, params=querystring)
-        if response.status_code == 200:
-
-            
-            json_str = json.dumps(response.json()["data"]["hotels"])
-
-            return json_str[:2000]
-
-            return response.json()
-        else:
-            return {"error": f"Failed to fetch hotel destination information, status code: {response.status_code}"}
-    except requests.RequestException as e:
-        return {"error": f"Request failed: {str(e)}"}
-
-    print(response.json())
+    params = input.dict()  # Convert the Pydantic model to a dictionary for the query string
     
-def search_hotel(tracking_no: str):
-    return asyncio.run(search_hotel_iter(tracking_no))
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url, headers=headers, params=params) as response:
+            if response.status == 200:
+                return await response.json()  # Return the parsed JSON data
+            else:
+                return {"error": f"Failed to search hotels, status code: {response.status}"}
 
-class HotelInput(BaseModel):
-    tracking_no: str = Field(description="搜索信息")
+def fetch_hotels(input: HotelSearchInput):
+    return asyncio.run(search_hotels(input))
 
 if __name__ == "__main__":
-    result = search_hotel("YT7457241805741")
-    print("答案:",result)
+    # Example use with hypothetical dates and other parameters
+    hotel_input = HotelSearchInput(
+        dest_id="-2092174",
+        search_type="CITY",
+        arrival_date="2024-05-20",  # Replace <REQUIRED> with actual date
+        departure_date="2024-05-25",  # Replace <REQUIRED> with actual date
+        adults=1,
+        children_age="0,17",
+        room_qty=1,
+        page_number=1,
+        languagecode="zh-cn",
+        currency_code="CNY"
+    )
+    result = fetch_hotels(hotel_input)
+    print("Answer:", result)

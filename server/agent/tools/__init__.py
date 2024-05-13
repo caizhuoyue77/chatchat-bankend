@@ -16,3 +16,10 @@ from server.agent.tools.weather_index_1d import weather_index_1d
 from server.agent.tools.get_current_time import get_current_time, TimeInput
 from server.agent.tools.bookings_search_hotel import search_hotel, HotelInput
 from server.agent.tools.bookings_search_hotel_destination import search_hotel_destination
+from server.agent.tools.bookings_search_attraction_locations import get_attraction_locations, AttractionLocationSearchInput
+from server.agent.tools.bookings_search_attractions import get_attractions, AttractionSearchInput
+from server.agent.tools.bookings_search_flights import get_flights, FlightSearchInput
+from server.agent.tools.bookings_get_currency import get_currency
+from server.agent.tools.bookings_get_languages import get_languages
+from server.agent.tools.bookings_get_exchange_rates import get_exchange_rates
+
