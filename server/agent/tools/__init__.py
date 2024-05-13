@@ -13,3 +13,6 @@ from server.agent.tools.weather_rain_minute import weather_rain_minute
 from server.agent.tools.weather_forcast_3d import weather_forcast_3d
 from server.agent.tools.weather_forcast_7d import weather_forcast_7d
 from server.agent.tools.weather_index_1d import weather_index_1d
+from server.agent.tools.get_current_time import get_current_time, TimeInput
+from server.agent.tools.bookings_search_hotel import search_hotel, HotelInput
+from server.agent.tools.bookings_search_hotel_destination import search_hotel_destination

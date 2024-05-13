@@ -43,8 +43,20 @@ tools = [
     ),
      Tool.from_function(
         func=weather_forcast_24h,
-        name="天气预报查询",
+        name="24小时天气预报查询",
         description="天气预报查询，查询中国和全球城市天气的未来24小时预报数据，包括：温度、湿度、风向、风力等。",
+        args_schema=WeatherInput,
+    ),
+     Tool.from_function(
+        func=weather_forcast_24h,
+        name="3天天气预报查询",
+        description="天气预报查询，查询中国和全球城市天气的未来3天的天气预报数据，包括：温度、湿度、风向、风力等。",
+        args_schema=WeatherInput,
+    ),
+     Tool.from_function(
+        func=weather_forcast_24h,
+        name="7天天气预报查询",
+        description="天气预报查询，查询中国和全球城市天气的未来7天的天气预报数据，包括：温度、湿度、风向、风力等。",
         args_schema=WeatherInput,
     ),
      Tool.from_function(
@@ -53,6 +65,18 @@ tools = [
         description="分钟级别的降雨预报查询，精确到分钟级别，识别location（9位数字）",
         args_schema=WeatherInput,
     ),
+    Tool.from_function(
+        func=get_current_time,
+        name="获取当前时间",
+        description="获取当前时间，返回当前时间的字符串",
+        args_schema=TimeInput,
+    ),
+    Tool.from_function(
+        func=search_hotel,
+        name="查询酒店信息",
+        description="查询某地点的酒店信息，返回详细的酒店信息",
+        args_schema=HotelInput,
+    )
 ]
 
 tool_names = [tool.name for tool in tools]

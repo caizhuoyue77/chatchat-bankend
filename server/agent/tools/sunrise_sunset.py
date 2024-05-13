@@ -3,28 +3,14 @@ import asyncio
 from pydantic import BaseModel, Field
 import requests
 import re
+from server.agent.tools.helper import get_location_id, get_date
 
 async def sunrise_sunset_iter(input: str):
     base_url = "https://devapi.qweather.com/v7/astronomy/sun"
 
-    print("\n################\n#############\n###############|n")
-    print(input)
-
-    location = ""
-    date = ""
-
-    pattern = r'location[=:(（是](\d{9}).*?date[=:（(是](\d{8})'
-
-    matches = re.findall(pattern, input)
-
-    for match in matches:
-        location, date = match
-
-    if not (len(location) == 9 and len(date) == 8):
-        location, date = input.split(',')
-
-    print(location, date)
-
+    location = get_location_id(input)
+    date = get_date(input)
+    
     params = {
         "location": location,
         "date": date,
