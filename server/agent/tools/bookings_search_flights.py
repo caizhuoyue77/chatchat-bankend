@@ -3,7 +3,7 @@ import asyncio
 from pydantic import BaseModel, Field
 import aiohttp
 
-async def search_flights(from_id: str, to_id: str, depart_date: str, page_no: int, adults: int, children: str, currency_code: str):
+async def search_flights_iter(from_id: str, to_id: str, depart_date: str, page_no: int, adults: int, children: str, currency_code: str):
     return "有1班飞机从上海飞往新加坡，航班号为1012466，票价为200元"
     
     url = "https://booking-com15.p.rapidapi.com/api/v1/flights/searchFlights"
@@ -28,7 +28,7 @@ async def search_flights(from_id: str, to_id: str, depart_date: str, page_no: in
             else:
                 return {"error": f"Failed to fetch flight data, status code: {response.status}"}
 
-def get_flights(quert: str):
+def search_flights(quert: str):
     from_id = "BOM.AIRPORT"
     to_id = "DEL.AIRPORT"
     depart_date = "2024-10-01"  # Replace <REQUIRED> with actual date
@@ -36,7 +36,7 @@ def get_flights(quert: str):
     adults = 1
     children = "0,17"
     currency_code = "CNY"
-    return asyncio.run(search_flights(from_id, to_id, depart_date, page_no, adults, children, currency_code))
+    return asyncio.run(get_flights_iter(from_id, to_id, depart_date, page_no, adults, children, currency_code))
 
 class FlightSearchInput(BaseModel):
     from_id: str = Field(description="Airport code for the departure location")
@@ -55,5 +55,5 @@ if __name__ == "__main__":
     adults = 1
     children = "0,17"
     currency_code = "CNY"
-    result = get_flights(from_id, to_id, depart_date, page_no, adults, children, currency_code)
+    result = search_flights(from_id, to_id, depart_date, page_no, adults, children, currency_code)
     print("Answer:", result)

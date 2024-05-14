@@ -3,7 +3,7 @@ import asyncio
 from pydantic import BaseModel, Field
 import aiohttp
 
-async def search_flight_location(query: str):
+async def search_flight_location_iter(query: str):
     url = "https://booking-com15.p.rapidapi.com/api/v1/flights/searchDestination"
     headers = {
         "X-RapidAPI-Key": "e873f2422cmsh92c1c839d99aee8p1dfd77jsne5cf72c01848",
@@ -18,14 +18,14 @@ async def search_flight_location(query: str):
             else:
                 return {"error": f"Failed to fetch flight locations, status code: {response.status}"}
 
-def get_flight_location(query: str):
+def search_flight_location(query: str):
     query = "shanghai"
-    return asyncio.run(search_flight_location(query))
+    return asyncio.run(search_flight_location_iter(query))
 
 class FlightLocationSearchInput(BaseModel):
     query: str = Field(default_factory=str, description="The search query string")
 
 if __name__ == "__main__":
     query_string = "new"
-    result = get_flight_location(query_string)
+    result = search_flight_location(query_string)
     print("Answer:", result)

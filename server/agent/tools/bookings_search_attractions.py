@@ -3,7 +3,7 @@ import asyncio
 from pydantic import BaseModel, Field
 import aiohttp
 
-async def search_attractions(id: str, page: int, currency_code: str, language_code: str):
+async def search_attractions_iter(id: str, page: int, currency_code: str, language_code: str):
     url = "https://booking-com15.p.rapidapi.com/api/v1/attraction/searchAttractions"
     headers = {
         "X-RapidAPI-Key": "e873f2422cmsh92c1c839d99aee8p1dfd77jsne5cf72c01848",
@@ -23,12 +23,12 @@ async def search_attractions(id: str, page: int, currency_code: str, language_co
             else:
                 return {"error": f"Failed to fetch attractions, status code: {response.status}"}
 
-def get_attractions(query: str):
+def search_attractions(query: str):
     id = "eyJwaW5uZWRQcm9kdWN0IjoiUFJ2cFpHVWxKWkN6IiwidWZpIjotMTkyNDQ2NX0="
     page = 1
     currency_code = "CNY"
     language_code = "zh-cn"
-    return asyncio.run(search_attractions(id, page, currency_code, language_code))
+    return asyncio.run(search_attractions_iter(id, page, currency_code, language_code))
 
 class AttractionSearchInput(BaseModel):
     id: str = Field(description="Unique identifier for the attraction")
@@ -41,5 +41,5 @@ if __name__ == "__main__":
     page = 1
     currency_code = "CNY"
     language_code = "zh-cn"
-    result = get_attractions(id, page, currency_code, language_code)
+    result = search_attractions(id, page, currency_code, language_code)
     print("Answer:", result)

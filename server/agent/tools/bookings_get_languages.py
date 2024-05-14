@@ -3,7 +3,7 @@ import asyncio
 from pydantic import BaseModel, Field
 import requests
 
-async def fetch_languages():
+async def get_languages_iter():
 
     return "中文是zh-cn 英文是us-en 没了"
     
@@ -24,7 +24,7 @@ async def fetch_languages():
         return {"error": f"Request failed: {str(e)}"}
 
 def get_languages(query: str):
-    return asyncio.run(fetch_languages())
+    return asyncio.run(get_languages_iter())
 
 if __name__ == "__main__":
     result = get_languages("")

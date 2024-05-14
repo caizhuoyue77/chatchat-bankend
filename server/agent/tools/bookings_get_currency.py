@@ -3,7 +3,7 @@ import asyncio
 from pydantic import BaseModel, Field
 import aiohttp
 
-async def get_currency():
+async def get_currency_iter():
     url = "https://booking-com15.p.rapidapi.com/api/v1/meta/getCurrency"
     headers = {
         "X-RapidAPI-Key": "e873f2422cmsh92c1c839d99aee8p1dfd77jsne5cf72c01848",
@@ -17,8 +17,8 @@ async def get_currency():
             else:
                 return {"error": f"Failed to fetch currency data, status code: {response.status}"}
 
-def fetch_currency(query:str):
-    return asyncio.run(get_currency())
+def get_currency(query:str):
+    return asyncio.run(get_currency_iter())
 
 if __name__ == "__main__":
     result = fetch_currency("")

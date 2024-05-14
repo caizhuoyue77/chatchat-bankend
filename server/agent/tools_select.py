@@ -6,6 +6,62 @@ from server.agent.tools.knowledge_graph_search import knowledge_graph_search, Kn
 
 tools = [
     Tool.from_function(
+        func=get_currency,
+        name="获取不同货币信息",
+        description="查询所有货币的货币码，例如CNY",
+        args_schema=TimeInput,
+    ),
+    Tool.from_function(
+        func=get_exchange_rates,
+        name="获取货币汇率",
+        description="查询人民币比其他货币的实时汇率",
+        args_schema=TimeInput,
+    ),
+    Tool.from_function(
+        func=get_languages,
+        name="获取不同语言信息",
+        description="查询所有语言的语言码，例如zh-cn",
+        args_schema=TimeInput,
+    ),
+    Tool.from_function(
+        func=get_location_to_lat_lon,
+        name="转换位置到经纬度",
+        description="根据提供的地点查询，返回对应的经纬度信息",
+        args_schema=TimeInput,
+    ),
+    Tool.from_function(
+        func=get_attraction_locations,
+        name="搜索旅游景点的位置id和坐标",
+        description="根据提供的地点查询旅游景点的位置id和坐标信息",
+        args_schema=TimeInput,
+    ),
+    Tool.from_function(
+        func=get_attraction_locations,
+        name="搜索旅游景点详细信息",
+        description="根据提供的旅游景点的位置id查询景点的详细信息",
+        args_schema=TimeInput,
+    ),
+    Tool.from_function(
+        func=get_attraction_locations,
+        name="搜索旅游景点的位置id和坐标",
+        description="根据提供的地点查询旅游景点的位置id和坐标信息",
+        args_schema=TimeInput,
+    ),
+    Tool.from_function(
+        func=get_flights,
+        name="查询航班信息",
+        description="查询航班的信息",
+        args_schema=TimeInput,
+    )
+    Tool.from_function(
+        func=fetch_hotels,
+        name="查询酒店信息",
+        description="查询某地点的酒店信息，返回详细的酒店信息",
+        args_schema=TimeInput,
+    ),
+    
+
+    Tool.from_function(
         func=waterlevelcheck,
         name="水位查询工具",
         description="无需访问互联网，使用这个工具查询某个圩区的实时水位高度，水位信息常用来辅助进行防洪排涝调度方案决策",
@@ -71,42 +127,7 @@ tools = [
         description="获取当前时间，返回当前时间的字符串",
         args_schema=TimeInput,
     ),
-    Tool.from_function(
-        func=fetch_hotels,
-        name="查询酒店信息",
-        description="查询某地点的酒店信息，返回详细的酒店信息",
-        args_schema=TimeInput,
-    ),
-    Tool.from_function(
-        func=get_flights,
-        name="查询航班信息",
-        description="查询航班的信息",
-        args_schema=TimeInput,
-    ),
-    Tool.from_function(
-    func=get_location_to_lat_lon,
-    name="转换位置到经纬度",
-    description="根据提供的地点查询，返回对应的经纬度信息",
-    args_schema=TimeInput,
-),
-Tool.from_function(
-    func=get_exchange_rates,
-    name="获取汇率信息",
-    description="根据基础货币获取当前的汇率信息，返回汇率数据",
-    args_schema=TimeInput,
-),
-Tool.from_function(
-    func=get_languages,
-    name="获取不同语言信息",
-    description="查询所有语言的语言码，例如zh-cn",
-    args_schema=TimeInput,
-),
-Tool.from_function(
-    func=get_currency,
-    name="获取不同货币信息",
-    description="查询所有货币的货币码，例如CNY",
-    args_schema=TimeInput,
-)
+
 ]
 
 tool_names = [tool.name for tool in tools]

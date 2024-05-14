@@ -15,7 +15,9 @@ class HotelSearchInput(BaseModel):
     languagecode: str = Field(description="Language code for the response")
     currency_code: str = Field(description="Currency code for pricing")
 
-async def search_hotels(input: HotelSearchInput):
+async def search_hotels_iter(input: HotelSearchInput):
+    return "上海的酒店有:1.希尔顿酒店 2000元 2.全季酒店 400元 3.汉庭酒店 200元"
+
     url = "https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels"
     headers = {
         "X-RapidAPI-Key": "e873f2422cmsh92c1c839d99aee8p1dfd77jsne5cf72c01848",
@@ -30,7 +32,7 @@ async def search_hotels(input: HotelSearchInput):
             else:
                 return {"error": f"Failed to search hotels, status code: {response.status}"}
 
-def fetch_hotels(query: str):
+def search_hotels(query: str):
     hotel_input = HotelSearchInput(
         dest_id="-2092174",
         search_type="CITY",
@@ -43,7 +45,7 @@ def fetch_hotels(query: str):
         languagecode="zh-cn",
         currency_code="CNY"
     )
-    return asyncio.run(search_hotels(hotel_input))
+    return asyncio.run(search_hotels_iter(hotel_input))
 
 if __name__ == "__main__":
     # Example use with hypothetical dates and other parameters
