@@ -19,7 +19,7 @@ def process_top_20_movies(movies_data):
         top_20_movies.append(movie_info)
     return top_20_movies
 
-async def fetch_imdb_top_100_movies_iter() -> dict:
+async def search_imdb_top_100_movies_iter() -> dict:
     """
     Asynchronously fetches the top 100 movies list from IMDb via the RapidAPI service.
     
@@ -41,17 +41,17 @@ async def fetch_imdb_top_100_movies_iter() -> dict:
     except requests.RequestException as e:
         return {"error": f"Request failed: {str(e)}"}
 
-def fetch_imdb_top_100_movies(query: str) -> dict:
+def search_imdb_top_100_movies(query: str) -> dict:
     """
     A synchronous wrapper function to fetch the IMDb top 100 movies.
 
     Returns:
         dict: The result from the asynchronous fetch function, containing either the top 100 movies or an error message.
     """
-    return asyncio.run(fetch_imdb_top_100_movies_iter())
+    return asyncio.run(search_imdb_top_100_movies_iter())
 
 if __name__ == "__main__":
-    movies_data = fetch_imdb_top_100_movies()
+    movies_data = search_imdb_top_100_movies()
     # processed_data = process_response(movies_data)
 
     # Write the processed data to a JSON file
