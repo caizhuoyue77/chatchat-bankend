@@ -20,9 +20,10 @@ from server.agent.tools.get_current_time import get_current_time, TimeInput
 from server.agent.tools.bookings_get_currency import get_currency
 from server.agent.tools.bookings_get_exchange_rates import get_exchange_rates
 from server.agent.tools.bookings_get_languages import get_languages
-from server.agent.tools.bookings_location_to_lat_lon import get_location_to_lat_lon
+from server.agent.tools.bookings_location_to_lat_lon import location_to_lat_lon
 from server.agent.tools.bookings_search_attractions import search_attractions
 from server.agent.tools.bookings_search_flights import search_flights
 from server.agent.tools.bookings_search_hotels import search_hotels
-
+from server.agent.tools.imdb_top_100_movies import search_imdb_top_100_movies
+from server.agent.tools.imdb_week_top_10 import fetch_week_top_10
 

@@ -24,43 +24,37 @@ tools = [
         args_schema=TimeInput,
     ),
     Tool.from_function(
-        func=get_location_to_lat_lon,
+        func=location_to_lat_lon,
         name="转换位置到经纬度",
         description="根据提供的地点查询，返回对应的经纬度信息",
         args_schema=TimeInput,
     ),
     Tool.from_function(
-        func=get_attraction_locations,
-        name="搜索旅游景点的位置id和坐标",
-        description="根据提供的地点查询旅游景点的位置id和坐标信息",
-        args_schema=TimeInput,
-    ),
-    Tool.from_function(
-        func=get_attraction_locations,
+        func=search_attractions,
         name="搜索旅游景点详细信息",
         description="根据提供的旅游景点的位置id查询景点的详细信息",
         args_schema=TimeInput,
     ),
     Tool.from_function(
-        func=get_attraction_locations,
+        func=search_attractions,
         name="搜索旅游景点的位置id和坐标",
         description="根据提供的地点查询旅游景点的位置id和坐标信息",
         args_schema=TimeInput,
     ),
     Tool.from_function(
-        func=get_flights,
+        func=search_flights,
         name="查询航班信息",
         description="查询航班的信息",
         args_schema=TimeInput,
-    )
+    ),
     Tool.from_function(
-        func=fetch_hotels,
+        func=search_hotels,
         name="查询酒店信息",
         description="查询某地点的酒店信息，返回详细的酒店信息",
         args_schema=TimeInput,
     ),
     Tool.from_function(
-        func=imdb_top_100_movies,
+        func=search_imdb_top_100_movies,
         name="IMDB Top 100 Movies",
         description="从IMDB电影网站获取排名前100的电影",
         args_schema=TimeInput,
@@ -131,7 +125,6 @@ tools = [
         description="获取当前时间，返回当前时间的字符串",
         args_schema=TimeInput,
     ),
-
 ]
 
 tool_names = [tool.name for tool in tools]

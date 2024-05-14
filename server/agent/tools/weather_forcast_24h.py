@@ -3,8 +3,7 @@ import asyncio
 from pydantic import BaseModel, Field
 import requests
 import re
-from server.agent.tools.helper import get_location_id
-
+from helper import get_location_id, parse_response
 
 async def weather_forcast_24h_iter(input: str):
     base_url = "https://devapi.qweather.com/v7/weather/24h"
@@ -19,7 +18,6 @@ async def weather_forcast_24h_iter(input: str):
     # 发送GET请求
     try:
         response = requests.get(base_url, params=params)
-
         # 检查响应状态码
         if response.status_code == 200:
             return response.json()  # 返回解析后的JSON数据
@@ -29,6 +27,7 @@ async def weather_forcast_24h_iter(input: str):
         return {"error": f"Request failed: {str(e)}"}
 
 def weather_forcast_24h(location: str):
+    location = "101010100"
     return asyncio.run(weather_forcast_24h_iter(location))
 
 class WeatherInput(BaseModel):
@@ -36,5 +35,5 @@ class WeatherInput(BaseModel):
     # date: str = Field(description="日期，yyyymmdd格式，比如20240425")
 
 if __name__ == "__main__":
-    result = weather_forcast_24h("101040100")
-    print("答案:",result)
+    result = weather_forcast_24h("北京最近24小时内会不会下雨？最高温多少度？")
+    print(result)
