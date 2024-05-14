@@ -44,6 +44,6 @@ def search_imdb(query: str) -> dict:
     return asyncio.run(search_imdb_iter(query))
 
 if __name__ == "__main__":
-    search_query = "<REQUIRED>"  # Replace '<REQUIRED>' with your actual search query
+    search_query = "titanic"
     imdb_search_results = search_imdb(search_query)
     print("Search Results:", imdb_search_results)
