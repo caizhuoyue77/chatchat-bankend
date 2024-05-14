@@ -59,8 +59,12 @@ tools = [
         description="查询某地点的酒店信息，返回详细的酒店信息",
         args_schema=TimeInput,
     ),
-    
-
+    Tool.from_function(
+        func=imdb_top_100_movies,
+        name="IMDB Top 100 Movies",
+        description="从IMDB电影网站获取排名前100的电影",
+        args_schema=TimeInput,
+    ),
     Tool.from_function(
         func=waterlevelcheck,
         name="水位查询工具",
