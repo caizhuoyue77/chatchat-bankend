@@ -45,5 +45,5 @@ def fan_favorites(country: str = "US") -> dict:
     return asyncio.run(fan_favorites_iter(country))
 
 if __name__ == "__main__":
-    fan_favorites_data = fetch_fan_favorites()
+    fan_favorites_data = fan_favorites()
     print("Fan Favorites:", fan_favorites_data)
