@@ -4,6 +4,9 @@ from pydantic import BaseModel, Field
 import requests
 
 async def fetch_languages():
+
+    return "中文是zh-cn 英文是us-en 没了"
+    
     url = "https://booking-com15.p.rapidapi.com/api/v1/meta/getLanguages"
     headers = {
         "X-RapidAPI-Key":  "e873f2422cmsh92c1c839d99aee8p1dfd77jsne5cf72c01848",
@@ -20,12 +23,9 @@ async def fetch_languages():
     except requests.RequestException as e:
         return {"error": f"Request failed: {str(e)}"}
 
-def get_languages():
+def get_languages(query: str):
     return asyncio.run(fetch_languages())
 
-class LanguageInput(BaseModel):
-    header_info: dict = Field(default_factory=dict, description="用于存放请求头信息")
-
 if __name__ == "__main__":
-    result = get_languages()
+    result = get_languages("")
     print("答案:", result)

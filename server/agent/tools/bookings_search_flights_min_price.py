@@ -24,6 +24,10 @@ async def get_min_price(from_id: str, to_id: str, depart_date: str, currency_cod
                 return {"error": f"Failed to fetch minimum flight price, status code: {response.status}"}
 
 def fetch_min_price(from_id: str, to_id: str, depart_date: str, currency_code: str):
+    from_id = "BOM.AIRPORT"
+    to_id = "DEL.AIRPORT"
+    depart_date = "2024-10-01"  # Replace this with the actual departure date
+    currency_code = "CNY"
     return asyncio.run(get_min_price(from_id, to_id, depart_date, currency_code))
 
 class MinPriceInput(BaseModel):
@@ -35,7 +39,7 @@ class MinPriceInput(BaseModel):
 if __name__ == "__main__":
     from_id = "BOM.AIRPORT"
     to_id = "DEL.AIRPORT"
-    depart_date = "2024-01-01"  # Replace this with the actual departure date
-    currency_code = "AED"
+    depart_date = "2024-10-01"  # Replace this with the actual departure date
+    currency_code = "CNY"
     result = fetch_min_price(from_id, to_id, depart_date, currency_code)
     print("Answer:", result)

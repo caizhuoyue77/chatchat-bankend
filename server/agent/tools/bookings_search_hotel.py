@@ -31,7 +31,19 @@ async def search_hotels(input: HotelSearchInput):
                 return {"error": f"Failed to search hotels, status code: {response.status}"}
 
 def fetch_hotels(input: HotelSearchInput):
-    return asyncio.run(search_hotels(input))
+    hotel_input = HotelSearchInput(
+        dest_id="-2092174",
+        search_type="CITY",
+        arrival_date="2024-05-20",  # Replace <REQUIRED> with actual date
+        departure_date="2024-05-25",  # Replace <REQUIRED> with actual date
+        adults=1,
+        children_age="0,17",
+        room_qty=1,
+        page_number=1,
+        languagecode="zh-cn",
+        currency_code="CNY"
+    )
+    return asyncio.run(search_hotels(hotel_input))
 
 if __name__ == "__main__":
     # Example use with hypothetical dates and other parameters

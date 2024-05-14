@@ -22,6 +22,8 @@ async def search_attraction_locations(query: str, language_code: str):
                 return {"error": f"Failed to fetch attractions, status code: {response.status}"}
 
 def get_attraction_locations(query: str, language_code: str):
+    query = "shanghai"
+    language_code = "zh-cn"
     return asyncio.run(search_attraction_locations(query, language_code))
 
 class AttractionLocationSearchInput(BaseModel):

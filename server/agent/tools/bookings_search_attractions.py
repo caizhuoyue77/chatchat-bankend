@@ -24,6 +24,10 @@ async def search_attractions(id: str, page: int, currency_code: str, language_co
                 return {"error": f"Failed to fetch attractions, status code: {response.status}"}
 
 def get_attractions(id: str, page: int, currency_code: str, language_code: str):
+    id = "eyJwaW5uZWRQcm9kdWN0IjoiUFJ2cFpHVWxKWkN6IiwidWZpIjotMTkyNDQ2NX0="
+    page = 1
+    currency_code = "CNY"
+    language_code = "zh-cn"
     return asyncio.run(search_attractions(id, page, currency_code, language_code))
 
 class AttractionSearchInput(BaseModel):

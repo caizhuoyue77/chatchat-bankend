@@ -27,6 +27,7 @@ async def search_flights(from_id: str, to_id: str, depart_date: str, page_no: in
                 return {"error": f"Failed to fetch flight data, status code: {response.status}"}
 
 def get_flights(from_id: str, to_id: str, depart_date: str, page_no: int, adults: int, children: str, currency_code: str):
+    
     return asyncio.run(search_flights(from_id, to_id, depart_date, page_no, adults, children, currency_code))
 
 class FlightSearchInput(BaseModel):
@@ -41,10 +42,10 @@ class FlightSearchInput(BaseModel):
 if __name__ == "__main__":
     from_id = "BOM.AIRPORT"
     to_id = "DEL.AIRPORT"
-    depart_date = "<REQUIRED>"  # Replace <REQUIRED> with actual date
+    depart_date = "2024-10-01"  # Replace <REQUIRED> with actual date
     page_no = 1
     adults = 1
     children = "0,17"
-    currency_code = "AED"
+    currency_code = "CNY"
     result = get_flights(from_id, to_id, depart_date, page_no, adults, children, currency_code)
     print("Answer:", result)

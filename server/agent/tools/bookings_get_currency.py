@@ -17,13 +17,9 @@ async def get_currency():
             else:
                 return {"error": f"Failed to fetch currency data, status code: {response.status}"}
 
-def fetch_currency():
+def fetch_currency(query:str):
     return asyncio.run(get_currency())
 
-class CurrencyInput(BaseModel):
-    # This class is provided as an example if future implementations require input parameters
-    pass
-
 if __name__ == "__main__":
-    result = fetch_currency()
+    result = fetch_currency("")
     print("Answer:", result)

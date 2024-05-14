@@ -22,10 +22,11 @@ async def search_hotel_destination_iter(destination: str):
         return {"error": f"Request failed: {str(e)}"}
 
 
-def search_hotel_destination(tracking_no: str):
-    return asyncio.run(search_hotel_destination_iter(tracking_no))
+def search_hotel_destination(destination: str):
+    destination = "shanghai"
+    return asyncio.run(search_hotel_destination_iter(destination))
 
-class hotel_destinationInput(BaseModel):
+class HotelDestinationInput(BaseModel):
     destination: str = Field(description="搜索酒店的地址")
 
 if __name__ == "__main__":

@@ -19,6 +19,7 @@ async def location_to_lat_lon(query: str):
                 return {"error": f"Failed to convert location to latitude and longitude, status code: {response.status}"}
 
 def get_location_to_lat_lon(query: str):
+    query="shanghai"
     return asyncio.run(location_to_lat_lon(query))
 
 class LocationToLatLonInput(BaseModel):
