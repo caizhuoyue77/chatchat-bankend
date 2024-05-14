@@ -75,7 +75,13 @@ tools = [
         func=fetch_hotels,
         name="查询酒店信息",
         description="查询某地点的酒店信息，返回详细的酒店信息",
-        args_schema=HotelSearchInput,
+        args_schema=TimeInput,
+    ),
+    Tool.from_function(
+        func=get_flights,
+        name="查询航班信息",
+        description="查询航班的信息",
+        args_schema=TimeInput,
     ),
     Tool.from_function(
     func=get_location_to_lat_lon,

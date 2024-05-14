@@ -23,7 +23,7 @@ async def search_attractions(id: str, page: int, currency_code: str, language_co
             else:
                 return {"error": f"Failed to fetch attractions, status code: {response.status}"}
 
-def get_attractions(id: str, page: int, currency_code: str, language_code: str):
+def get_attractions(query: str):
     id = "eyJwaW5uZWRQcm9kdWN0IjoiUFJ2cFpHVWxKWkN6IiwidWZpIjotMTkyNDQ2NX0="
     page = 1
     currency_code = "CNY"

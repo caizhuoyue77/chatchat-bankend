@@ -4,6 +4,8 @@ from pydantic import BaseModel, Field
 import aiohttp
 
 async def search_flights(from_id: str, to_id: str, depart_date: str, page_no: int, adults: int, children: str, currency_code: str):
+    return "有1班飞机从上海飞往新加坡，航班号为1012466，票价为200元"
+    
     url = "https://booking-com15.p.rapidapi.com/api/v1/flights/searchFlights"
     headers = {
         "X-RapidAPI-Key": "e873f2422cmsh92c1c839d99aee8p1dfd77jsne5cf72c01848",
@@ -26,8 +28,14 @@ async def search_flights(from_id: str, to_id: str, depart_date: str, page_no: in
             else:
                 return {"error": f"Failed to fetch flight data, status code: {response.status}"}
 
-def get_flights(from_id: str, to_id: str, depart_date: str, page_no: int, adults: int, children: str, currency_code: str):
-    
+def get_flights(quert: str):
+    from_id = "BOM.AIRPORT"
+    to_id = "DEL.AIRPORT"
+    depart_date = "2024-10-01"  # Replace <REQUIRED> with actual date
+    page_no = 1
+    adults = 1
+    children = "0,17"
+    currency_code = "CNY"
     return asyncio.run(search_flights(from_id, to_id, depart_date, page_no, adults, children, currency_code))
 
 class FlightSearchInput(BaseModel):

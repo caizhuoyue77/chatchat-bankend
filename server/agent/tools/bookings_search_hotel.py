@@ -30,7 +30,7 @@ async def search_hotels(input: HotelSearchInput):
             else:
                 return {"error": f"Failed to search hotels, status code: {response.status}"}
 
-def fetch_hotels(input: HotelSearchInput):
+def fetch_hotels(query: str):
     hotel_input = HotelSearchInput(
         dest_id="-2092174",
         search_type="CITY",

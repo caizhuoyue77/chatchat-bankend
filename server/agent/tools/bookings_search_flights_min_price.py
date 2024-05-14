@@ -23,7 +23,7 @@ async def get_min_price(from_id: str, to_id: str, depart_date: str, currency_cod
             else:
                 return {"error": f"Failed to fetch minimum flight price, status code: {response.status}"}
 
-def fetch_min_price(from_id: str, to_id: str, depart_date: str, currency_code: str):
+def fetch_min_price(query: str):
     from_id = "BOM.AIRPORT"
     to_id = "DEL.AIRPORT"
     depart_date = "2024-10-01"  # Replace this with the actual departure date

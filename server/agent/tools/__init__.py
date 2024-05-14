@@ -18,7 +18,7 @@ from server.agent.tools.bookings_search_hotel import fetch_hotels, HotelSearchIn
 # from server.agent.tools.bookings_search_hotel_destination import search_hotel_destination, HotelDestinationInput
 # from server.agent.tools.bookings_search_attraction_locations import get_attraction_locations, AttractionLocationSearchInput
 # from server.agent.tools.bookings_search_attractions import get_attractions, AttractionSearchInput
-# from server.agent.tools.bookings_search_flights import get_flights, FlightSearchInput
+from server.agent.tools.bookings_search_flights import get_flights, FlightSearchInput
 from server.agent.tools.bookings_get_currency import get_currency
 from server.agent.tools.bookings_get_languages import get_languages
 from server.agent.tools.bookings_get_exchange_rates import get_exchange_rates
